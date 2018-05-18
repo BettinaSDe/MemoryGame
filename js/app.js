@@ -37,7 +37,7 @@
 
 
  function startGame(initialStart) {
-     // if it's not an initialStart
+     /* if it's not an initialStart */
      if (!initialStart) {
          const deck = document.querySelector('.deck');
          /*ifloop for  firstElementChilds */
