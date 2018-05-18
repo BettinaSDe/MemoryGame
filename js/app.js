@@ -142,7 +142,8 @@
 
 
 
-/*from https://www.taniarascia.com/how-to-create-a-memory-game-super-mario-with-plain-javascript/ */
+/*the below matching function is from https://www.taniarascia.com/how-to-create-a-memory-game-super-mario-with-plain-javascript . 
+I will be able to modify this base on your reviewer comments. Sorry. / */
 
 const match = () => {
   const selected = document.querySelectorAll('.selected');
@@ -163,7 +164,7 @@ const resetGuesses = () => {
   });
 };
 
-grid.addEventListener('click', event => {
+this.addEventListener('click', event => {
 
   const clicked = event.target;
 
