@@ -101,104 +101,130 @@
 
          const restartButton = document.querySelector('.restart');
 
-         /* Restart button event listener */
-         restartButton.addEventListener('click', function() {
+ 
+         
 
-             startGame();
-         });
+restartButton.addEventListener('click', function () {
 
-
-        /*event.target to change class of card   */
-         function cardSelectHandler(event) {
-             event.target.classList.add('open', 'show',);
-         }
-
-         /*function cardSelectHandler(event) {
-             event.target.classList.remove('open', 'show');
-           },500); */
-
-
-         /*event.target to change class of card   */
-        /*  function cardSelectHandler(event) {
-              event.target.classList.add('show');
-          }  */
-
-
-         /* event listener function to get the cards  */
-
-         function assignCardHandler() {
-
-             const cards = document.querySelectorAll('.card');
-
-            /* nodeList collection for cards _ > card    */
-             for (const card of cards) {
-                 card.addEventListener('click', cardSelectHandler);
-             }
-         }
-
-
-         /*function start is true */
-         startGame(true);
-
-
-
-/*the below matching function is from https://www.taniarascia.com/how-to-create-a-memory-game-super-mario-with-plain-javascript . 
-I will be able to modify this base on your reviewer comments. Sorry. / */
-
-const match = () => {
-  const selected = document.querySelectorAll('.selected');
-  selected.forEach(card => {
-    card.classList.add('match');
-  });
-};
-
-const resetGuesses = () => {
-  firstGuess = '';
-  secondGuess = '';
-  count = 0;
-  previousTarget = null;
-
-  var selected = document.querySelectorAll('.selected');
-  selected.forEach(card => {
-    card.classList.remove('selected');
-  });
-};
-
-this.addEventListener('click', event => {
-
-  const clicked = event.target;
-
-  if (
-    clicked.nodeName === 'SECTION' ||
-    clicked === previousTarget ||
-    clicked.parentNode.classList.contains('selected') ||
-    clicked.parentNode.classList.contains('match')
-  ) {
-    return;
-  }
-
-  if (count < 2) {
-    count++;
-    if (count === 1) {
-      firstGuess = clicked.parentNode.dataset.name;
-      console.log(firstGuess);
-      clicked.parentNode.classList.add('selected');
-    } else {
-      secondGuess = clicked.parentNode.dataset.name;
-      console.log(secondGuess);
-      clicked.parentNode.classList.add('selected');
-    }
-
-    if (firstGuess && secondGuess) {
-      if (firstGuess === secondGuess) {
-        setTimeout(match, delay);
-      }
-      setTimeout(resetGuesses, delay);
-    }
-    previousTarget = clicked;
-  }
-
+    startGame();
+    // Reset clicks for fresh start
+    cardClicks = 0;
+    temporaryMatchCheck.length = 0;
+    permanentCheck.length = 0;
 });
+
+/*
+---------
+Since the code creates new cards each time only part 
+that needs to change the array `temporary` and permanent ones.
+
+You are right You need to put these line inside 
+the restartbutton event listener
+
+`temporaryMatchCheck.length = 0;`
+
+`permanentCheck.length = 0;`
+
+Remember setting length to 0 means delete all the contents of that array.
+-----
+
+*/
+
+
+/*event.target to change class of card   */
+let cardClicks = 0;
+// Since there is no any clicks at the beginning you have to set this
+// to true as initial value otherwise you won't even be able to click cards
+let actionCompleted = true;
+function cardSelectHandler(event) {
+
+    // If current cards are still open do not open cards until
+    // the ones that open are closed
+    // Doing a return like this makes the function stop
+    // So it doesn't execute rest of the block
+    if (!actionCompleted) {
+        return;
+    }
+
+    // If you click an item that's already matched with its pair or
+    // If you click the same card twice instead of trying another
+    // It won't accept that click
+    if (temporaryMatchCheck.includes(event.target) || permanentChecks.includes(event.target)) {
+        return;
+    }
+
+    // If it comes this far then it means clicks were valid and let's
+    // see if it was a match after the second pick of course
+    event.target.classList.add('open', 'show');
+
+    // Push clicked item into the temporary array
+    temporaryMatchCheck.push(event.target);
+
+    // When two cards are selected
+    if (temporaryMatchCheck.length === 2) {
+        if (temporaryMatchCheck[0].firstElementChild.className === temporaryMatchCheck[1].firstElementChild.className) {
+            matched();
+        }
+        else {
+            actionCompleted = false;
+            unmatched();
+        }
+    }
+
+
+    //event.target.classList.add('open', 'show', );
+    // If it was a valid click then increment the clicks
+    cardClicks++;
+
+    console.log(temporaryMatchCheck);
+}
+
+const temporaryMatchCheck = [];
+const permanentChecks = [];
+
+function matched() {
+    permanentChecks.push(temporaryMatchCheck[0], temporaryMatchCheck[1]);
+
+    // Also clear the temporary array for new checks
+    temporaryMatchCheck.length = 0;
+}
+
+
+function unmatched() {
+    // If it's a fail attempt of match then remove classes with
+    // 500 ms delay
+    setTimeout(() => {
+        temporaryMatchCheck[0].classList.remove('open', 'show');
+        temporaryMatchCheck[1].classList.remove('open', 'show');
+
+        // This is a way to flush an array
+        // It removes all the content of the array
+        temporaryMatchCheck.length = 0;
+        actionCompleted = true;
+    }, 500);
+}
+
+
+/* event listener function to get the cards  */
+
+function assignCardHandler() {
+
+    const cards = document.querySelectorAll('.card');
+
+    /* nodeList collection for cards _ > card    */
+    for (const card of cards) {
+        card.addEventListener('click', cardSelectHandler);
+    }
+}
+
+
+/*function start is true */
+startGame(true);
+
+         
+
+
+
 
 
 
