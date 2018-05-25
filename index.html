@@ -21,10 +21,12 @@
         	<ul class="stars">
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-diamond"></i></li>
+        		<li><i class="fa fa-star"></i></li>
         	</ul>
 
-        	<span class="Moves">3</span> Moves
+        <!--	<span class="Moves">0</span> Moves
+          /* 	Add another span with class of timer. In between the span add 0:00. */
+          <span class="Timer">0:00</span> Moves -->
 
             <div class="restart">
         		<i class="fa fa-repeat"></i>
@@ -83,6 +85,26 @@
         </ul>
     </div>
 
+  <!--  <div id="popup1" class="overlay">
+        <div class="popup">
+            <h2>Congratulations 🎉</h2>
+            <a class="close" href=# >×</a>
+            <div class="content-1">
+                Congratulations you're a winner 🎉🎉
+            </div>
+            <div class="content-2">
+                <p>You made <span id=finalMove> </span> moves </p>
+                <p>in <span id=totalTime> </span> </p>
+                <p>Rating:  <span id=starRating></span></p>
+            </div>
+            <button id="play-again"onclick="playAgain()">
+                Play again 😄</a>
+            </button>
+        </div>
+    </div>
+
+  -->
+
 
     <!-- Trigger/Open The Modal from https://www.w3schools.com/howto/howto_css_modals.asp -->
     <button id="myBtn">Open Modal</button>
@@ -90,10 +112,13 @@
     <!-- The Modal -->
     <div id="myModal" class="modal">
 
-      <!-- Modal content -->
+      <!-- Modal content
+     You need to add a congratulations that the player won.
+      You need to link the time it took to win, the final star rating, and the moves it took to win. Then link to the restart button. -->
       <div class="modal-content">
         <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
+        <p>Congratulations! 😄 You have won! 😄 Hit the replay button to play again. </p>
+
       </div>
 
     </div>
