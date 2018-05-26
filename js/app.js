@@ -98,19 +98,7 @@
 
 
 
-
-
-
-         
-         
-
-
-
-
-
-
-
-
+      
 
 
 
@@ -136,14 +124,8 @@ restartButton.addEventListener('click', function () {
 Since the code creates new cards each time only part 
 that needs to change the array `temporary` and permanent ones.
 
-You are right You need to put these line inside 
-the restartbutton event listener
 
-`temporaryMatchCheck.length = 0;`
-
-`permanentCheck.length = 0;`
-
-Remember setting length to 0 means delete all the contents of that array.
+Setting length to 0 means delete all the contents of that array.
 -----
 
 */
@@ -154,12 +136,6 @@ let cardClicks = 0;
 // Since there is no any clicks at the beginning you have to set this
 // to true as initial value otherwise you won't even be able to click cards
 let actionCompleted = true;
-
-
-
-
-
-
 
 
 
@@ -342,7 +318,7 @@ timerContainer.innerHTML = totalSeconds + 's';
  * the totalSeconds will be increased 
  * by 1 after 1000ms (1 second!)
  * 
- * HINT: We need to call this function ONCE, and the best time to call it
+ *  We need to call this function ONCE, and the best time to call it
  * is when the user click on a card (The first card!)
  * This means that our user is start playing now! ;)
  */
@@ -360,7 +336,7 @@ timerContainer.innerHTML = totalSeconds + 's';
  * We will call it when the game is over.
  * So, we will call it at the end of `isOver` function
  * 
- * HINT: That's why I created the `liveTimer` variable, 
+ * Using the `liveTimer` variable, 
  * to store the setInterval's function, so that we can stop it by its name!
  */
 function stopTimer() {
