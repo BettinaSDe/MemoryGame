@@ -1,6 +1,7 @@
 
 
 
+
 /*
  * Create a list that holds all of your cards
  */
@@ -96,36 +97,26 @@
          };
 
 
-
-
-      
-
-
-
          /*  adding reset game functionality
           Get the restart button */
 
          const restartButton = document.querySelector('.restart');
 
- 
-         
 
-restartButton.addEventListener('click', function () {
-
-    startGame();
-    // Reset clicks for fresh start
-    cardClicks = 0;
-    temporaryMatchCheck.length = 0;
-    permanentCheck.length = 0;
-});
 
 /*
 ---------
-Since the code creates new cards each time only part 
+Since the code creates new cards each time only part
 that needs to change the array `temporary` and permanent ones.
 
+You are right You need to put these line inside
+the restartbutton event listener
 
-Setting length to 0 means delete all the contents of that array.
+`temporaryMatchCheck.length = 0;`
+
+`permanentCheck.length = 0;`
+
+Remember setting length to 0 means delete all the contents of that array.
 -----
 
 */
@@ -139,10 +130,6 @@ let actionCompleted = true;
 
 
 
-
-
-
-
 function cardSelectHandler(event) {
 
     // If current cards are still open do not open cards until
@@ -153,6 +140,10 @@ function cardSelectHandler(event) {
         return;
     }
 
+    if (isFirstClick) {
+        startTimer();
+        isFirstClick = false;
+    }
     // If you click an item that's already matched with its pair or
     // If you click the same card twice instead of trying another
     // It won't accept that click
@@ -163,6 +154,7 @@ function cardSelectHandler(event) {
     // If it comes this far then it means clicks were valid and let's
     // see if it was a match after the second pick of course
     event.target.classList.add('open', 'show');
+    addMove();
 
     // Push clicked item into the temporary array
     temporaryMatchCheck.push(event.target);
@@ -215,7 +207,7 @@ function unmatched() {
 /* event listener function to get the cards  */
 
 function assignCardHandler() {
-
+    console.log('is called');
     const cards = document.querySelectorAll('.card');
 
     /* nodeList collection for cards _ > card    */
@@ -225,26 +217,12 @@ function assignCardHandler() {
 }
 
 
-/*function start is true 
+/*function start is true
 startGame(true);   */
 
-   
+
 //first click to start timer
 let isFirstClick = true;
-
-function cardSelectHandler(event) {
-
-//Show the card's picture on click
-
-  if (isFirstClick) {
-    startTimer();
-    isFirstClick = false;
-  }
-
-
- // Add New Move
-    addMove();
-}
 
 /*
  * Check if the game is over!
@@ -257,16 +235,16 @@ function isOver() {
 
         /*
          * Display your popup here, the `alert` is for explanation only!
-         * 
-         * In your popup, you should create a button, 
+         *
+         * In your popup, you should create a button,
          * To let the user play a new game
-         * 
+         *
          * After clicking on that button, you should:
          *  - Call the `init` function to re-create the cards
          *  - Call the `reset` function to reset all variables
          */
         alert("GAME OVER!");
-        
+
     }
 }
 
@@ -314,11 +292,11 @@ let liveTimer,
 timerContainer.innerHTML = totalSeconds + 's';
 
 /*
- * We call this function to start our function, 
- * the totalSeconds will be increased 
+ * We call this function to start our function,
+ * the totalSeconds will be increased
  * by 1 after 1000ms (1 second!)
- * 
- *  We need to call this function ONCE, and the best time to call it
+ *
+ * HINT: We need to call this function ONCE, and the best time to call it
  * is when the user click on a card (The first card!)
  * This means that our user is start playing now! ;)
  */
@@ -335,8 +313,8 @@ timerContainer.innerHTML = totalSeconds + 's';
  * Our timer won't stop. To stop it, we should clearInterval!
  * We will call it when the game is over.
  * So, we will call it at the end of `isOver` function
- * 
- * Using the `liveTimer` variable, 
+ *
+ * HINT: That's why I created the `liveTimer` variable,
  * to store the setInterval's function, so that we can stop it by its name!
  */
 function stopTimer() {
@@ -345,21 +323,19 @@ function stopTimer() {
 
 /* *//*
  * Restart Button
- *//*
+ */
 const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click", function() {
     // Delete ALL cards
-    cardsContainer.innerHTML = "";
 
+    reset();
     // Call `init` to create new cards
-    init();
+    startGame();
 
     // Reset the game
-    reset();
+
 
 });
-
-*/
 
 /*
  * Reset All Game Variables
@@ -377,7 +353,7 @@ function reset() {
 
     /*
      * Reset the `timer`
-     * 
+     *
      * - Stop it first
      * - Then, reset the `isFirstClick` to `true` to be able to start the timer again!
      * - Don't forget about `totalSeconds`, it must be `0`
@@ -387,6 +363,8 @@ function reset() {
     isFirstClick = true;
     totalSeconds = 0;
     timerContainer.innerHTML = totalSeconds + "s";
+    permanentChecks.length = 0;
+    temporaryMatchCheck.length = 0;
 }
 
 
@@ -424,7 +402,3 @@ function reset() {
 
    /*function start is true */
 startGame(true);
-
-
-
-
