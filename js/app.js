@@ -3,6 +3,7 @@
 
 
 
+
 /*
  * Create a list that holds all of your cards
  */
@@ -137,7 +138,7 @@ function cardSelectHandler(event) {
     temporaryMatchCheck.push(event.target);
 
     // When two cards are selected
-    if (temporaryMatchCheck.length === 16) {
+    if (temporaryMatchCheck.length === 2) {
         if (temporaryMatchCheck[0].firstElementChild.className === temporaryMatchCheck[1].firstElementChild.className) {
             matched();
         }
@@ -147,7 +148,7 @@ function cardSelectHandler(event) {
         }
     }
 
-    if (permanentChecks.length === 2) {
+    if (permanentChecks.length === 16) {
         isOver();
 
         stopTimer(liveTimer);
@@ -168,7 +169,8 @@ function cardSelectHandler(event) {
     }
 
 
-        // If it was a valid click then increment the clicks
+    //event.target.classList.add('open', 'show', );
+    // If it was a valid click then increment the clicks
     cardClicks++;
 
     console.log(temporaryMatchCheck);
@@ -214,13 +216,33 @@ function assignCardHandler() {
 
 
 
+
+
 //first click to start timer
 let isFirstClick = true;
+
+/*
+ * Check if the game is over!
+ */
+
+
+// Get the modal from https://www.w3schools.com/howto/howto_css_modals.asp
 
 
 /* MODAL LOGIC */
 
 const modal = document.querySelector('.modal');
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -281,9 +303,14 @@ let liveTimer,
 timerContainer.innerHTML = totalSeconds + 's';
 
 /*
- * increasing totalSeconds by 1 after 1000ms (1 second). 
- * This function is called once at the start */ 
-
+ * We call this function to start our function,
+ * the totalSeconds will be increased
+ * by 1 after 1000ms (1 second!)
+ *
+ * HINT: We need to call this function ONCE, and the best time to call it
+ * is when the user click on a card (The first card!)
+ * This means that our user is start playing now! ;)
+ */
  function startTimer() {
     liveTimer = setInterval(function() {
         // Increase the totalSeconds by 1
@@ -294,11 +321,23 @@ timerContainer.innerHTML = totalSeconds + 's';
 }
 
 /*
- Stop timer when 16 cards are matched per if loop in card handler 
+ * Our timer won't stop. To stop it, we should clearInterval!
+ * We will call it when the game is over.
+ * So, we will call it at the end of `isOver` function
+ *
+ * HINT: That's why I created the `liveTimer` variable,
+ * to store the setInterval's function, so that we can stop it by its name!
  */
 function stopTimer(liveTimer) {
     if (liveTimer) {
         clearInterval(liveTimer);
+    }
+}
+
+/*
+function resetTimer(timer) {
+    if (timer) {
+        clearInterval(timer);
     }
 }
 
@@ -312,7 +351,7 @@ restartBtn.addEventListener("click", function() {
     // Delete ALL cards
 
     reset();
-    // Call `startGame` to create new cards
+    // Call `init` to create new cards
     startGame();
 
     // Reset the game
@@ -335,10 +374,12 @@ function reset() {
     starsContainer.innerHTML = star + star + star;
 
     /*
-     * Reset the `timer`: Stop, reset the `isFirstClick` to `true` to be able 
-     * to start the timer again!
-     * `totalSeconds` to `0`
-     *  update HTML timer's container
+     * Reset the `timer`
+     *
+     * - Stop it first
+     * - Then, reset the `isFirstClick` to `true` to be able to start the timer again!
+     * - Don't forget about `totalSeconds`, it must be `0`
+     * - One more thing, is to update the HTML timer's container
      */
     stopTimer();
     isFirstClick = true;
