@@ -23,8 +23,7 @@ body {
 body {
   background: #ffffff url('../img/298603-P7SB19-922.png'); /* Background image from Background image free licence with acknowledgement to
   <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by Freepik</a> */
-  background-position: center; 
-  background-repeat: repeat 
+  background-repeat: repeat; 
   font-family: 'Coda', cursive;
 }
 
