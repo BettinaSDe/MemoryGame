@@ -1,11 +1,27 @@
 
 
 
+var modal = document.getElementById('myModal');
+
+function isOver() {
+    if (permanentChecks.length === 16) {
+
+        modal.classList.add("reveal-modal");}
+    
+   }
+
+  win();
+
+
+  function win() {
+    isOver();
+    console.log(myModal);
+}
 
 
 // Get the modal from https://www.w3schools.com/howto/howto_css_modals.asp
 
-var modal = document.getElementById('myModal');
+//var modal = document.getElementById('myModal');
 
 // Get the button that opens the modal
 //var btn = document.getElementById("myBtn");
@@ -49,8 +65,8 @@ function winning() {
 
 
 
-function isOver() {
-    if (permanentChecks.length === 2) {
+//function isOver() {
+  //  if (permanentChecks.length === 2) {
 
         // Stop our timer
        /* stopTimer();
@@ -69,18 +85,18 @@ function isOver() {
 
         /*"use strict";*/
 
-    modal.classList.add("reveal-modal");}
+  //  modal.classList.add("reveal-modal");}
     
-   }
+  // }
 
-  win();
+  //win();
 
 
 
-function win() {
-    isOver();
-    console.log(myModal);
-}
+//function win() {
+  //  isOver();
+ //   console.log(myModal);
+// }
  /*  "use strict";
 
    function isOver() {
