@@ -137,7 +137,7 @@ function cardSelectHandler(event) {
     temporaryMatchCheck.push(event.target);
 
     // When two cards are selected
-    if (temporaryMatchCheck.length === 2) {
+    if (temporaryMatchCheck.length === 16) {
         if (temporaryMatchCheck[0].firstElementChild.className === temporaryMatchCheck[1].firstElementChild.className) {
             matched();
         }
