@@ -235,18 +235,6 @@ const modal = document.querySelector('.modal');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 function isOver() {
     modal.classList.add('reveal-modal');
 }
@@ -303,13 +291,8 @@ let liveTimer,
 timerContainer.innerHTML = totalSeconds + 's';
 
 /*
- * We call this function to start our function,
- * the totalSeconds will be increased
- * by 1 after 1000ms (1 second!)
- *
- * HINT: We need to call this function ONCE, and the best time to call it
- * is when the user click on a card (The first card!)
- * This means that our user is start playing now! ;)
+ *function to start timer, the totalSeconds will be increased
+ * by 1 after 1000ms (1 second). this function will be called at the start. 
  */
  function startTimer() {
     liveTimer = setInterval(function() {
@@ -321,23 +304,17 @@ timerContainer.innerHTML = totalSeconds + 's';
 }
 
 /*
- * Our timer won't stop. To stop it, we should clearInterval!
- * We will call it when the game is over.
- * So, we will call it at the end of `isOver` function
- *
- * HINT: That's why I created the `liveTimer` variable,
- * to store the setInterval's function, so that we can stop it by its name!
- */
+stop timer  */
 function stopTimer(liveTimer) {
     if (liveTimer) {
         clearInterval(liveTimer);
     }
 }
 
-/*
-function resetTimer(timer) {
-    if (timer) {
-        clearInterval(timer);
+/* reset timer */ 
+function reset(liveTimer) {
+    if (liveTimer) {
+        clearInterval(liveTimer);
     }
 }
 
@@ -351,7 +328,7 @@ restartBtn.addEventListener("click", function() {
     // Delete ALL cards
 
     reset();
-    // Call `init` to create new cards
+    // Call `startGame` to create new cards
     startGame();
 
     // Reset the game
@@ -376,10 +353,10 @@ function reset() {
     /*
      * Reset the `timer`
      *
-     * - Stop it first
-     * - Then, reset the `isFirstClick` to `true` to be able to start the timer again!
-     * - Don't forget about `totalSeconds`, it must be `0`
-     * - One more thing, is to update the HTML timer's container
+     * - Stop it 
+     * - reset`isFirstClick` to `true` to be able to start the timer again
+     * - `totalSeconds` must be `0`
+     * -  update the HTML timer's container
      */
     stopTimer();
     isFirstClick = true;
