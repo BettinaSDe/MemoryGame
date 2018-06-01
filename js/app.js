@@ -148,7 +148,7 @@ function cardSelectHandler(event) {
         }
     }
 
-    if (permanentChecks.length === 2) {
+    if (permanentChecks.length === 16) {
         isOver();
     }
 
