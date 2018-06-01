@@ -361,13 +361,13 @@ function reset() {
     stopTimer();
     isFirstClick = true;
     totalSeconds = 0;
-    timerContainer.innerHTML = totalSeconds + "s";
+    timerContainer.innerHTML = totalSeconds;
     permanentChecks.length = 0;
     temporaryMatchCheck.length = 0;
 }
 
 
-   /*function start is true */
+ /*function start is true */
 startGame(true);
 
 
