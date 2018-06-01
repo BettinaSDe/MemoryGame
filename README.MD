@@ -7,7 +7,7 @@ In my Fend Udacity course, I had to create a memory game where upon clicked, two
 
 ## How to Play:
 
-* The goal is to match all the cards together and win the game.
+* Open the index.html in html preview. The goal is to match all the cards together and win the game.
 
 1. Start by clicking on two cards, if they match, look for another pair of cards. If cards are not a pair, try again.
 
@@ -18,10 +18,15 @@ In my Fend Udacity course, I had to create a memory game where upon clicked, two
 
 ## Tools Used: 
 
-* Getting started Udacity excersize: 
+*  Udacity static code Starter kit: 
   * https://github.com/udacity/fend-project-memory-game
 
-* Images taken from Font-awesome 
+* Icons taken from Bootstrap Font-awesome 
+
+* Background image free licence with acknowledgement to
+ <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by Freepik</a>
+
+
 
 
 
