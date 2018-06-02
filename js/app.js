@@ -100,6 +100,7 @@
 
 
 
+
 /*event.target to change class of card   */
 let cardClicks = 0;
 // Since there is no any clicks at the beginning you have to set this
@@ -153,7 +154,7 @@ function cardSelectHandler(event) {
 
         stopTimer(liveTimer);
 
-        
+
 
         // declare star rating variable
         var starRating = document.querySelector(".stars").innerHTML;
@@ -245,6 +246,7 @@ const repeatButton = document.querySelector('.close');
 repeatButton.addEventListener('click', function() {
     modal.classList.remove('reveal-modal');
     reset();
+    reset(liveTimer)
 });
 
 
@@ -292,7 +294,7 @@ timerContainer.innerHTML = totalSeconds + 's';
 
 /*
  *function to start timer, the totalSeconds will be increased
- * by 1 after 1000ms (1 second). this function will be called at the start. 
+ * by 1 after 1000ms (1 second). this function will be called at the start.
  */
  function startTimer() {
     liveTimer = setInterval(function() {
@@ -311,7 +313,7 @@ function stopTimer(liveTimer) {
     }
 }
 
-/* reset timer */ 
+/* reset timer */
 function reset(liveTimer) {
     if (liveTimer) {
         clearInterval(liveTimer);
@@ -353,7 +355,7 @@ function reset() {
     /*
      * Reset the `timer`
      *
-     * - Stop it 
+     * - Stop it
      * - reset`isFirstClick` to `true` to be able to start the timer again
      * - `totalSeconds` must be `0`
      * -  update the HTML timer's container
@@ -361,7 +363,8 @@ function reset() {
     stopTimer();
     isFirstClick = true;
     totalSeconds = 0;
-    timerContainer.innerHTML = totalSeconds;
+    liveTimer = 0;
+    timerContainer.innerHTML = totalSeconds + "s";
     permanentChecks.length = 0;
     temporaryMatchCheck.length = 0;
 }
@@ -369,9 +372,3 @@ function reset() {
 
  /*function start is true */
 startGame(true);
-
-
-
-
-
-
