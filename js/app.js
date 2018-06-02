@@ -246,7 +246,7 @@ const repeatButton = document.querySelector('.close');
 repeatButton.addEventListener('click', function() {
     modal.classList.remove('reveal-modal');
     reset();
-    reset(liveTimer)
+    reset(liveTimer);
 });
 
 
